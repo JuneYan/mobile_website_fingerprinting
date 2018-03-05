@@ -22,6 +22,9 @@ def open_private_tab(device):
     device.tap_ui_element('resource-id','org.mozilla.firefox:id/browser_actionbar')
     
 def check_fully_loaded(device):
+    """
+    check whether current webpage is fully loaded
+    """
     try:
         e = get_elements(device, 'resource-id', 'org.mozilla.firefox:id/stop')
         return False
@@ -29,6 +32,9 @@ def check_fully_loaded(device):
         return True 
 
 def get_url(device):
+    """
+    get actual url from the address bar
+    """
     url = ''
     try:
         element = get_elements(device, 'resource-id', 'org.mozilla.firefox:id/browser_toolbar')
@@ -41,8 +47,6 @@ def get_url(device):
 ## directory to top 1m csv files
 top_1m_path = '/home/h/Desktop/dataCollection/top-1m.csv'
 
-
-
 device_ids = Device.get_device_identifiers()
 device = Device(device_ids)
 top_1m_websites = []
@@ -50,7 +54,8 @@ with open(top_1m_path, "rb") as f:
     reader = csv.reader(f)
     for row in reader:
         top_1m_websites.append(row[1])
-    
+
+### number of websites visiting
 webnum = 500
 urls = top_1m_websites[:webnum]
 
